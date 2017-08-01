@@ -27,10 +27,10 @@ function validate(docCate, prod, sessionAttrs){
   var productId = null;
   var keyArray = null;
 
-  if(prodKeyWords && sessionAttrs.attrVal){
+  if(prod){
     // validate product id in sessionAttributes
       var selectedProdName = prod.toLowerCase();
-      console.log('Product is not null' + selectedProdName);
+      console.log('Product is ' + selectedProdName);
 
       for (var i = 0; i < prodKeyWords.length; i++) {
         keyArray = prodKeyWords[i].keys;
@@ -41,13 +41,14 @@ function validate(docCate, prod, sessionAttrs){
         productId = null;
       }
       if (productId) {
+        console.log("Product found " + productId + " " + prod);
         // add the document id to sessionAttributes
-        return buildValidationResult(true, null, null, null, null, prodId, true);
+        return buildValidationResult(true, 'product', null, '', true, productId, true);
       }else{
         console.log("Product could not be found");
         return buildValidationResult(false, 'product', 'Sorry, we could not find the Product. do you have any other name for this product?');
       }
-      console.log("Product found " + productId + " " + prod);
+
   }
 
   return buildValidationResult(true, null, null);
