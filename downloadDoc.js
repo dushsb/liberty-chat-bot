@@ -3,6 +3,7 @@
 const lexResponse = require('./lexResponse');
 const validateDoc = require('./validateDoc');
 const validateProd = require('./validateProd');
+const fulfillment = require('./fulfillment');
 
 module.exports = function(intentRequest, callback){
 
@@ -97,12 +98,38 @@ module.exports = function(intentRequest, callback){
     console.log('Doc id ' + sessionAttributes.docId);
     console.log('Product Id ' + sessionAttributes.prodId);
 
+    var linkAddress = fulfillment.fulfill(intentRequest);
+
     callback(lexResponse.close(sessionAttributes, 'Fulfilled'
     , { contentType: 'PlainText',
-       content: `Okay, Here is the url where you can download ${doc} for ${prod}.`
-     }));
+       content: `Okay, Here is the url where you can download ${doc} for ${prod}.${linkAddress}`
+     },
+        buildResponseCard('Results', 'wait for download starts..', null, linkAddress, null)
+    ));
 
     //callback(lexResponse.close(intentRequest.sessionAttributes, 'Fulfilled', null, null));
     return;
   }
 };
+
+// Build a responseCard with a title, subtitle, and an optional set of options which should be displayed as buttons.
+function buildResponseCard(title, subTitle, options, imageUrl, attachmentLinkUrl) {
+    let buttons = null;
+    if (options !== null) {
+        buttons = [];
+        for (let i = 0; i < Math.min(5, options.length); i++) {
+            buttons.push(options[i]);
+        }
+    }
+    return {
+        contentType: 'application/vnd.amazonaws.card.generic',
+        version: 1,
+        genericAttachments: [{
+            title,
+            subTitle,
+            imageUrl,
+            attachmentLinkUrl,
+            buttons,
+        }],
+    };
+}

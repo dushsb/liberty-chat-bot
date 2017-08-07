@@ -17,13 +17,14 @@ function validate(doc, docCate, prod, sessionAttrs){
   var keyWords = [
       {"id":"001", "name":"", "keys":["brochure"]},
       {"id":"002", "name":"", "keys":["claims","claims form", "claim"]},
-      {"id":"003", "name":"", "keys":["benefit","summery of benefit","benefit summery"]},
+      {"id":"003", "name":"", "keys":["benefit","summery of benefit","benefit summery", "benefit schedule"]},
       {"id":"004", "name":"", "keys":["proposal","proposal form"]},
       {"id":"005", "name":"", "keys":["application","application form"]},
       {"id":"006", "name":"", "keys":["faq"]},
       {"id":"007", "name":"", "keys":["fact find form","fact","fact form"]},
       {"id":"008", "name":"", "keys":["giro form","giro"]},
-      {"id":"009", "name":"", "keys":["policy wordings"]}
+      {"id":"009", "name":"", "keys":["policy wordings"]},
+      {"id":"010", "name":"", "keys":["terms and conditions"]}
   ];
 
   if(doc){
