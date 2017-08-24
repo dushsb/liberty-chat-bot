@@ -70,3 +70,25 @@ function buildValidationResult(isValid, violatedSlot, messageContent, docId, isD
         attr: { docId: docId, isDocValid: isDocValid, prodId: prodId, isProdValid:isProdValid},
     };
 }
+
+// Build a responseCard with a title, subtitle, and an optional set of options which should be displayed as buttons.
+function buildResponseCard(title, subTitle, options, imageUrl, attachmentLinkUrl) {
+    let buttons = null;
+    if (options !== null) {
+        buttons = [];
+        for (let i = 0; i < Math.min(5, options.length); i++) {
+            buttons.push(options[i]);
+        }
+    }
+    return {
+        contentType: 'application/vnd.amazonaws.card.generic',
+        version: 1,
+        genericAttachments: [{
+            title,
+            subTitle,
+            imageUrl,
+            attachmentLinkUrl,
+            buttons,
+        }],
+    };
+}

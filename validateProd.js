@@ -2,10 +2,10 @@
 
 module.exports.validateProduct = function(intentRequest){
   var doc = intentRequest.currentIntent.slots.document;
-  var docCate = intentRequest.currentIntent.slots.category;
+  var prodCate = intentRequest.currentIntent.slots.category;
   var prod = intentRequest.currentIntent.slots.product;
-
-  return validate(docCate, prod, intentRequest.sessionAttributes);
+  console.log('ProdCate ' + prodCate);
+  return validate(prodCate, prod, intentRequest.sessionAttributes);
 };
 
 function validate(docCate, prod, sessionAttrs){

@@ -11,7 +11,7 @@ module.exports = function(intentRequest, callback){
   if(source === 'FulfillmentCodeHook'){
     callback(lexResponse.close(sessionAttributes, 'Fulfilled'
     , { contentType: 'PlainText',
-       content: `Are you looking for somekind of document`
+       content: 'Hay..., I can help you to find any kind of documents. just type i wanna download a document for start'
      }//,
         //buildResponseCard('Results', 'wait for download starts..', null, linkAddress, null)
     ));
